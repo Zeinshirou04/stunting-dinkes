@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Patient\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +17,17 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [AuthController::class, 'index'])->name('login');
+Route::get('/', function() {
+    return redirect()->route('login');
+});
+
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+
+Route::post('/login/verify', [AuthController::class, 'authenticate'])->name('authenticate');
+
+Route::get('/dashboard/home', [AdminController::class, 'index'])->name('dashboard-home');
+Route::get('/dashboard/data', [AdminController::class, 'data'])->name('dashboard-data');
+Route::get('/dashboard/chat', [AdminController::class, 'chat'])->name('dashboard-chat');
 
 Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
@@ -28,14 +38,14 @@ Route::get('/welcome', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__.'/auth.php';
