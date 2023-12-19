@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Patient\AdminController;
+use App\Http\Controllers\Patient\ChildController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::post('/login/verify', [AuthController::class, 'authenticate'])->name('aut
 
 Route::get('/dashboard/home', [AdminController::class, 'index'])->name('dashboard-home');
 Route::get('/dashboard/data', [AdminController::class, 'data'])->name('dashboard-data');
+Route::get('/dashboard/data/show', [ChildController::class, 'index'])->name('dashboard-show');
 Route::get('/dashboard/chat', [AdminController::class, 'chat'])->name('dashboard-chat');
 
 Route::get('/welcome', function () {

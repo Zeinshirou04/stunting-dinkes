@@ -7,6 +7,8 @@ use App\Models\Patient;
 use App\Models\Puskesmas;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
@@ -57,6 +59,12 @@ class AdminController extends Controller
             $kode_puskesmas = session()->get('kode_puskesmas');
             return $item['kode_puskesmas'] == $kode_puskesmas;
         });
+
+        foreach($patients as $key => $value) {
+            $patients[$key]['nik_anak'] = Crypt::encrypt($value['nik_anak']);
+        }
+
+        // dd($patients);
 
         $data = [
             'title' => 'Robot Lintang - Dashboard',

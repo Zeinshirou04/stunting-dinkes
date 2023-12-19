@@ -1,5 +1,12 @@
 import React from 'react';
+import crypto from 'crypto';
 import { Link, Head } from '@inertiajs/react';
+
+// function hashNik() {
+//     var nik = 123;
+//     var hash = crypto.createHash('sha256').update(nik).digest('hex');
+//     return hash;
+// }
 
 export default function Data(props) {
     var data = props.data;
@@ -22,11 +29,10 @@ export default function Data(props) {
           }       
         }
     }
+    // hashNik();
     return (
         <>
-            <div className='flex flex-col gap-4 items-center my-8 mx-4'>
-                <div className='mx-2'>
-                </div>
+            <div className='flex flex-col gap-4 items-center m-4'>
                 <div className='w-full mb-12'>
                     <label className="form-control w-2/4 max-w-xs">
                         <div className="label">
@@ -51,7 +57,7 @@ export default function Data(props) {
                                     {/* <td>{value.nik_anak}</td> */}
                                     <td>{value.nama_anak}</td>
                                     <td>
-                                        <a href="#">
+                                        <a href={'/dashboard/data/show?nik=' + value.nik_anak}>
                                             <button className="btn btn-info">Detail</button>
                                         </a>
                                     </td>
