@@ -57,6 +57,7 @@ class AuthController extends Controller
                     'username' => $user->username,
                     'status' => $user->status,
                     'idRole' => $user->idRole,
+                    'kode_puskesmas' => $user->kode_puskesmas,
                     'lastLogin' => Carbon::now(),
                 ];
                 session($session);

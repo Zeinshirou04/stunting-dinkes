@@ -7,11 +7,7 @@ import { Link, Head } from '@inertiajs/react';
 export default function Dashboard(props) {
     return (
         <>
-            <Head>
-                <title>
-                    {props.title}
-                </title>
-            </Head>
+            <Head title={props.title} />
             <div>
                 {props.view == 'Home' ? Home(props) : null}
                 {props.view == 'Data' ? Data(props) : null}

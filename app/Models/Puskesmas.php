@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Patient extends Authenticatable
+class Puskesmas extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -24,8 +24,8 @@ class Patient extends Authenticatable
         'Content-Type' => 'application/json'
     ];
 
-    protected $apiUrl = 'https://sim.sayanganak.semarangkota.go.id/api/stunting';
-    
+    protected $apiUrl = 'https://sim.sayanganak.semarangkota.go.id/api/list-puskesmas';
+     
     protected $fillable = [
 
     ];
@@ -50,7 +50,7 @@ class Patient extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function getStunting()
+    public function get()
     {
         $data = Http::withHeaders($this->header)->get($this->apiUrl)['data'];
         return $data;
