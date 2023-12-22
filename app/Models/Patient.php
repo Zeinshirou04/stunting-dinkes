@@ -24,7 +24,9 @@ class Patient extends Authenticatable
         'Content-Type' => 'application/json'
     ];
 
-    protected $apiUrl = 'https://sim.sayanganak.semarangkota.go.id/api/stunting';
+    // protected $apiUrl = 'https://sim.sayanganak.semarangkota.go.id/api/stunting';
+    // protected $apiUrl = 'http://119.2.50.170:5500/sayang-anak/api/stunting';
+    protected $apiUrl = 'http://119.2.50.170:5500/sayang-anak/api/pasien';
     
     protected $fillable = [
 

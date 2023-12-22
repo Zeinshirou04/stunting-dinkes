@@ -27,17 +27,23 @@ class AdminController extends Controller
     public function index()
     {
         $patient = new Patient();
-        $patients = array_filter($patient->getStunting(), function ($item) {
-            $kode_puskesmas = session()->get('kode_puskesmas');
-            return $item['kode_puskesmas'] == $kode_puskesmas;
-        });
-
         $puskesmas = new Puskesmas();
+        
         $puskesmas = array_filter($puskesmas->get(), function ($item) {
             $kode_puskesmas = session()->get('kode_puskesmas');
             return $item['kode'] == $kode_puskesmas;
         });
 
+        // dd($patient->getStunting());
+
+        // $patients = array_filter($patient->getStunting(), function ($item) {
+        //     return $item['puskesmas'] == $this->puskesmas;
+        // });
+        
+        $patients = $patient->getStunting();
+        // dd($patients);
+        
+        
         $data = [
             'title' => 'Robot Lintang - Dashboard',
             'view' => 'Home',
@@ -46,19 +52,21 @@ class AdminController extends Controller
             'data_view' => collect($patients)->sortBy('nama')->take(5)->toArray(),
             'puskesmas' => $puskesmas[1]['nama'],
         ];
-
+        
         // dd($data);
-
+        
         return Inertia::render('Profile/Dashboard', $data);
     }
-
+    
     public function data()
     {
         $patient = new Patient();
-        $patients = array_filter($patient->getStunting(), function ($item) {
-            $kode_puskesmas = session()->get('kode_puskesmas');
-            return $item['kode_puskesmas'] == $kode_puskesmas;
-        });
+        // $patients = array_filter($patient->getStunting(), function ($item) {
+        //     $kode_puskesmas = session()->get('kode_puskesmas');
+        //     return $item['kode_puskesmas'] == $kode_puskesmas;
+        // });
+        $patients = $patient->getStunting();
+        dd($patients);
 
         foreach($patients as $key => $value) {
             $patients[$key]['nik_anak'] = Crypt::encrypt($value['nik_anak']);

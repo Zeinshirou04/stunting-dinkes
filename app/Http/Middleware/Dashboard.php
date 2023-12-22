@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Auth;
 
-class Login
+class Dashboard
 {
     /**
      * Handle an incoming request.

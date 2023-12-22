@@ -24,10 +24,10 @@ export default function Login(props) {
                             <label className="form-control w-full my-4 mx-auto">
                                 <input type="password" name='Password' id='Password'  placeholder="Type Your Password Here..." className="input input-bordered rounded-full w-full text-sm" />
                                 <div className="label">
-                                    <label className="cursor-pointer">
+                                    {/* <label className="cursor-pointer">
                                         <input type="checkbox"className="checkbox checkbox-xs mr-2" />
                                         <span className="label-text text-xs">Remember me</span> 
-                                    </label>
+                                    </label> */}
                                     <a href="#">
                                         <span className="label-text-alt text-xs">Forgot your password?</span>
                                     </a>

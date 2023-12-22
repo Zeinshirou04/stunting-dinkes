@@ -26,12 +26,17 @@ class AuthController extends Controller
         //     return Inertia::render('Dashboard');
         // }
     }
-
+    
     public function index()
     {
+        if(session()->get('status') == 1) {
+            return redirect()->route('dashboard-home');    
+        }
+        
         $data = [
             'title' => 'Robot Lintang - Login',
         ];
+        // dd($data);
 
         return Inertia::render('LoginPage', $data);
     }
@@ -39,6 +44,7 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         // Check Credentials
+        
         $request->validate([
             'Username' => ['required'],
             'Password' => ['required'],
