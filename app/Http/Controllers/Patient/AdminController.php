@@ -20,7 +20,8 @@ class AdminController extends Controller
     public function __construct()
     {
         if(session()->get('status') != 1) {
-            return redirect('/login');    
+            // dd('Anda tidak memiliki akses');
+            return Inertia::location(route('login'));
         }
     }
 
@@ -61,12 +62,15 @@ class AdminController extends Controller
     public function data()
     {
         $patient = new Patient();
+        
         // $patients = array_filter($patient->getStunting(), function ($item) {
         //     $kode_puskesmas = session()->get('kode_puskesmas');
         //     return $item['kode_puskesmas'] == $kode_puskesmas;
         // });
+
         $patients = $patient->getStunting();
-        dd($patients);
+
+        // dd($patients);
 
         foreach($patients as $key => $value) {
             $patients[$key]['nik_anak'] = Crypt::encrypt($value['nik_anak']);

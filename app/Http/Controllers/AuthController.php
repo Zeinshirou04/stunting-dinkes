@@ -29,9 +29,9 @@ class AuthController extends Controller
     
     public function index()
     {
-        if(session()->get('status') == 1) {
-            return redirect()->route('dashboard-home');    
-        }
+        // if(session()->get('status') == 1) {
+        //     return redirect()->route('dashboard-home');    
+        // }
         
         $data = [
             'title' => 'Robot Lintang - Login',

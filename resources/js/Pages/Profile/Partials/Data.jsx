@@ -1,5 +1,4 @@
-import React from 'react';
-import crypto from 'crypto';
+import React, {useState} from 'react';
 import { Link, Head } from '@inertiajs/react';
 
 // function hashNik() {
@@ -29,6 +28,19 @@ export default function Data(props) {
           }       
         }
     }
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 5;
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+
+    const handleChangePage = (newPage) => {
+        setCurrentPage(newPage);
+    };
+
+    const filteredData = data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+
+    console.log(filteredData);
+
     return (
         <>
             <div className='flex flex-col gap-4 items-center m-4'>
@@ -50,7 +62,7 @@ export default function Data(props) {
                             </tr>
                             </thead>
                             <tbody>
-                            {Object.entries(data).map(([key, value]) => (
+                            {Object.entries(filteredData).map(([key, value]) => (
                                 <tr className='border-b-slate-700'>
                                     <th>{i++}</th>
                                     {/* <td>{value.nik_anak}</td> */}
@@ -64,6 +76,10 @@ export default function Data(props) {
                             ))}
                             </tbody>
                         </table>
+                        <div className='flex flex-row gap-2 mt-4'>
+                            <button  className="btn btn-info" onClick={() => handleChangePage(currentPage - 1)} disabled={currentPage === 0}>Prev</button>
+                            <button  className="btn btn-info" onClick={() => handleChangePage(currentPage + 1)} disabled={currentPage === totalPages - 1}>Next</button>
+                        </div>
                     </div>
                 </div>
             </div>
