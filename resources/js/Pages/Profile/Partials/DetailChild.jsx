@@ -8,17 +8,19 @@ export default function DetailChild(props) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
     }
+    // console.log(document.getElementById('measureTable'));
+    const measureTable = document.getElementById('measureTable');
     // console.log(data);
     return (
         <>
-            <div className='flex flex-col gap-4 items-center m-4'>
+            <div className='flex flex-col gap-4 items-center mb-4 mx-4'>
                 <div className='w-full'>
                     <div>
                         <h1 className='font-extrabold text-3xl'>Detail Anak</h1>
                         <h4>Adek {toTitleCase(data.nama_anak)}</h4>
                     </div>
                     <div className='w-full max-w-full overflow-x-auto'>
-                        <table className="table" id='biodataAnak'>
+                        <table className="table static" id='biodataAnak'>
                             <thead>
                                 <tr className='border-b-slate-700'>
                                     <th>###</th>
@@ -61,6 +63,9 @@ export default function DetailChild(props) {
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div className='flex flex-row gap-2 mt-4'>
+                        <button className="btn btn-accent" onClick={toggleMeasureView}>Meassure</button>
                     </div>
                 </div>
             </div>

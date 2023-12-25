@@ -19,6 +19,34 @@
         @inertiaHead
     </head>
     <body class="w-screen">
+        <div id="measureTable" class='h-full w-full absolute hidden'>
+            <div class="w-full h-full relative flex flex-col justify-center items-center">
+                <div id="measureFront" class="w-4/5 absolute z-20">
+                    <div class="w-full bg-slate-800 rounded-lg">
+                        <div class="w-full h-full p-4">
+                            <h1 class="text-lg font-bold mb-4">Ukur Data Anak</h1>
+                            <form action='/dashboard/data/measure' method="post">
+                                <input type="text" name="beratBadan" placeholder="Masukkan berat badan..." class="input input-bordered w-full max-w-xs mb-3" />
+                                <div class="mb-3">
+                                    <input type="text" name="tinggiBadan" placeholder="Masukkan tinggi badan..." class="input input-bordered w-full max-w-xs mb-3" />
+                                    <p class="text-sm text-gray-500">Hasil Z-Score: </p>
+                                </div>
+                                <input type="submit" class="btn btn-accent" value="Kirim">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="measureBack" onclick="toggleMeasureView()" class="h-full w-full bg-black/80 absolute z-10"></div>
+            </div>
+        </div>
         @inertia
+        <script>
+            function toggleMeasureView() {
+                if(measureTable.classList.contains('hidden')) {
+                    return measureTable.classList.remove('hidden');
+                }
+                return measureTable.classList.add('hidden');
+            }
+        </script>
     </body>
 </html>

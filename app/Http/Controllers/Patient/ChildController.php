@@ -26,9 +26,18 @@ class ChildController extends Controller
         $cryptNik = $request->nik;
 
         $patient = new Patient();
-        $patients = array_filter($patient->getStunting(), function ($item) {
+        
+        $puskesmas = new Puskesmas();
+
+        $puskesmas = array_filter($puskesmas->get(), function ($item) {
             $kode_puskesmas = session()->get('kode_puskesmas');
-            return $item['kode_puskesmas'] == $kode_puskesmas;
+            return $item['kode'] == $kode_puskesmas;
+        })[1];
+
+        // dd($patient->getStunting());
+
+        $patients = array_filter($patient->getStunting(), function ($item) use ($puskesmas) {
+            return $item['puskesmas'] == $puskesmas['nama'];
         });
 
         foreach($patients as $key => $value) {
@@ -45,6 +54,7 @@ class ChildController extends Controller
             'title' => 'Robot Lintang - Dashboard',
             'view' => 'Detail',
             'nama_user' => session()->get('nama'),
+            'cryptNik' => $cryptNik,
             'data' => $patients,
         ];
 

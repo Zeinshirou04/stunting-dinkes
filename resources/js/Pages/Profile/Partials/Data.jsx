@@ -9,6 +9,7 @@ import { Link, Head } from '@inertiajs/react';
 
 export default function Data(props) {
     var data = props.data;
+    console.log(typeof data, data);
     var i = 1;
     function searchData() {
         var input, filter, table, tr, td, i, txtValue;
