@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Patient;
 
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Patient;
 use App\Models\Puskesmas;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
@@ -17,8 +16,14 @@ class AdminController extends Controller
      * Display the user's profile form.
      */
 
+    private $patient;
+    private $puskesmas;
+
     public function __construct()
     {
+        $this->patient = new Patient();
+        $this->puskesmas = new Puskesmas();
+
         if(session()->get('status') != 1) {
             // dd('Anda tidak memiliki akses');
             return Inertia::location(route('login'));
@@ -27,17 +32,15 @@ class AdminController extends Controller
 
     public function index()
     {
-        $patient = new Patient();
-        $puskesmas = new Puskesmas();
 
-        $puskesmas = array_filter($puskesmas->get(), function ($item) {
+        $puskesmas = array_filter($this->puskesmas->get(), function ($item) {
             $kode_puskesmas = session()->get('kode_puskesmas');
             return $item['kode'] == $kode_puskesmas;
         })[1];
 
         // dd($patient->getStunting());
 
-        $patients = array_filter($patient->getStunting(), function ($item) use ($puskesmas) {
+        $patients = array_filter($this->patient->getStunting(), function ($item) use ($puskesmas) {
             return $item['puskesmas'] == $puskesmas['nama'];
         });
         
@@ -59,18 +62,14 @@ class AdminController extends Controller
     
     public function data()
     {
-        $patient = new Patient();
-        
-        $puskesmas = new Puskesmas();
-
-        $puskesmas = array_filter($puskesmas->get(), function ($item) {
+        $puskesmas = array_filter($this->puskesmas->get(), function ($item) {
             $kode_puskesmas = session()->get('kode_puskesmas');
             return $item['kode'] == $kode_puskesmas;
         })[1];
 
         // dd($patient->getStunting());
 
-        $patients = array_filter($patient->getStunting(), function ($item) use ($puskesmas) {
+        $patients = array_filter($this->patient->getStunting(), function ($item) use ($puskesmas) {
             return $item['puskesmas'] == $puskesmas['nama'];
         });
 
@@ -102,14 +101,30 @@ class AdminController extends Controller
         return Inertia::render('Profile/Dashboard', $data);
     }
 
-    public function chat()
+    public function device()
     {
-
+        $deviceID = User::where('id', session()->get('id'))->first()->id_alat == null ? null : User::where('id', session()->get('id'))->first()->id_alat;
         $data = [
             'title' => 'Robot Lintang - Dashboard',
-            'view' => 'Chat'
+            'view' => 'Device',
+            'id_alat' => $deviceID,
         ];
 
         return Inertia::render('Profile/Dashboard', $data);
+    }
+    
+    public function connect(Request $request) {
+        $deviceID = $request->input('deviceID');
+        $userID = session()->get('id');
+        // dd($deviceID);
+        User::where('id', $userID)->update(['id_alat' => $deviceID]);
+        return redirect()->route('dashboard-device');
+    }
+
+    public function disconnect(Request $request) {
+        $userID = session()->get('id');
+        // dd($deviceID);
+        User::where('id', $userID)->update(['id_alat' => null]);
+        return redirect()->route('dashboard-device');
     }
 }

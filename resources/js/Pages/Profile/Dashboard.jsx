@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './Partials/Home';
 import Data from './Partials/Data';
-import Chat from './Partials/Chat';
+import Chat from './Partials/Device';
 import DetailChild from './Partials/DetailChild';
 import { Link, Head } from '@inertiajs/react';
 
@@ -9,11 +9,11 @@ export default function Dashboard(props) {
     return (
         <>
             <Head title={props.title} />
-            <div>
-                <div className='w-full h-full pt-4'>
+            <div className='w-full'>
+                <div className='w-full h-full pt-3'>
                     {props.view == 'Home' ? Home(props) : null}
                     {props.view == 'Data' ? Data(props) : null}
-                    {props.view == 'Chat' ? Chat(props) : null}
+                    {props.view == 'Device' ? Chat(props) : null}
                     {props.view == 'Detail' ? DetailChild(props) : null}
                 </div>
                 <div className="btm-nav">
@@ -29,7 +29,7 @@ export default function Dashboard(props) {
                             <span className="btm-nav-label">Data</span>
                         </button>
                     </a>
-                    <a href="/dashboard/chat" className={props.view == 'Chat' ? 'active' : null}>
+                    <a href="/dashboard/device" className={props.view == 'Device' ? 'active' : null}>
                         <button className='flex flex-col justify-center items-center'>
                             <i className="fa-brands fa-bluetooth text-gray-400 text-lg font-light"></i>
                             <span className="btm-nav-label">Device</span>
