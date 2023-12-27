@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Patient;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Patient;
+use App\Models\Realtime;
 use App\Models\Puskesmas;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -126,5 +127,11 @@ class AdminController extends Controller
         // dd($deviceID);
         User::where('id', $userID)->update(['id_alat' => null]);
         return redirect()->route('dashboard-device');
+    }
+
+    public function getall() {
+        $realtime = new Realtime();
+        $data = $realtime->get()->latest()->first();
+        dd($data);
     }
 }

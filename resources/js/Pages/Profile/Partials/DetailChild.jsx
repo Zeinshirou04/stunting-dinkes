@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Head } from '@inertiajs/react';
 
 export default function DetailChild(props) {
@@ -8,11 +8,42 @@ export default function DetailChild(props) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
     }
-    const endpoint = 'http://robotlintang.id/api/api.php?data=getall'
-    axios.get(endpoint).then((response) => {console.log(response);});
+    const endpoint = 'https://robotlintang.id/api/api.php?data=realtime'
+    // const endpoint = 'https://127.0.0.1:8000/data/getall';
+    // axios.get(endpoint)
+    //     .then((response) => {
+    //         console.log(response.data)
+    //     });
     // console.log(document.getElementById('measureTable'));
     const measureTable = document.getElementById('measureTable');
     // console.log(data);
+
+    const [inputValue, setInputValue] = useState('');
+    var beratBadan = document.getElementById('beratBadan');
+    var tinggiBadan = document.getElementById('tinggiBadan');
+    var posisi = document.getElementById('posisi');
+
+    // console.log(beratBadan);
+
+    beratBadan.value = inputValue.sensor_1;
+    tinggiBadan.value = inputValue.sensor_2;
+    posisi.innerHTML = inputValue.posisi == 'T' ? 'Terlentang' : 'Berdiri';
+    
+    // Fetch data from the API and update inputValue
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(endpoint);
+            console.log(response.data.data[0]);
+            setInputValue(response.data.data[0]);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
+    // Set up an effect that runs whenever endpoint changes
+    useEffect(() => {
+        fetchData();
+    }, [endpoint]);  // Dependency array includes endpoint
     return (
         <>
             <div className='flex flex-col gap-4 items-center mb-4 mx-4'>

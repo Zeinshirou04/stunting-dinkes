@@ -39,7 +39,7 @@ Route::middleware('dashboard')->group(function () {
 
 
 Route::post('/login/verify', [AuthController::class, 'authenticate'])->name('authenticate');
-
+Route::get('/data/getall', [AdminController::class, 'getall']);
 // Route::get('/dashboard/home', [AdminController::class, 'index'])->name('dashboard-home');
 // Route::get('/dashboard/data', [AdminController::class, 'data'])->name('dashboard-data');
 // Route::get('/dashboard/data/show', [ChildController::class, 'index'])->name('dashboard-show');
