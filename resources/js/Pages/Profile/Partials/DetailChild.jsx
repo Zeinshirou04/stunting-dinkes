@@ -8,6 +8,8 @@ export default function DetailChild(props) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
     }
+    const endpoint = 'http://robotlintang.id/api/api.php?data=getall'
+    axios.get(endpoint).then((response) => {console.log(response);});
     // console.log(document.getElementById('measureTable'));
     const measureTable = document.getElementById('measureTable');
     // console.log(data);

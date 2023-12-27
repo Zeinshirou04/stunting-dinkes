@@ -30,6 +30,33 @@ export default function Device(props) {
         </form>
     </>
 
+    // let options = {
+    //     acceptAllDevices: true,
+    //     optionalServices: ['battery_service'] // Required to access service later.
+    // };
+  
+    // function connect() {
+    //     navigator.bluetooth
+    //         .requestDevice(options)
+    //         .then(device => device.gatt.connect())
+    //         .then(server => {
+    //             // Getting Battery Service…
+    //             return server.getPrimaryService('battery_service');
+    //         })
+    //         .then(service => {
+    //             // Getting Battery Level Characteristic…
+    //             return service.getCharacteristic('battery_level');
+    //         })
+    //         .then(characteristic => {
+    //             // Reading Battery Level…
+    //             return characteristic.readValue();
+    //         })
+    //         .then(value => {
+    //             console.log(`Battery percentage is ${value.getUint8(0)}`);
+    //         })
+    //         .catch(error => { console.error(error); });
+    // }
+
     const connectedView = 
     <> 
         <p className='label text-sm text-center'>Anda sekarang sudah terhubung dengan timbangan</p>
@@ -65,6 +92,7 @@ export default function Device(props) {
                         <div className="mt-3 w-full flex flex-col justify-center items-center">
                             {props.id_alat == null ? formView : connectedView}
                         </div>
+                        {/* <button className='btn btn-link' onClick={connect}>Connect</button> */}
                     </div>
                 </div>
             </div>
