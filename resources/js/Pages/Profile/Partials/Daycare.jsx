@@ -7,13 +7,10 @@ import { Link, Head } from '@inertiajs/react';
 //     return hash;
 // }
 
-export default function Data(props) {
+export default function Daycare(props) {
     var data = props.data;
     console.log(typeof data, data);
     var i = 1;
-
-    const [filteredData, setFilteredData] = useState(data);
-
     function searchData() {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("cari");
@@ -33,30 +30,15 @@ export default function Data(props) {
         }
     }
 
-    function searchData() {
-        var input, filter;
-        input = document.getElementById("cari");
-        filter = input.value.toUpperCase();
-
-        var newData = data.filter(item => {
-            var textValue = item.nama_anak.toUpperCase();
-            return  textValue.indexOf(filter) > -1;
-        });
-
-        setFilteredData(newData);
-    }
-
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 5;
-    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+    const totalPages = Math.ceil(data.length / itemsPerPage);
 
     const handleChangePage = (newPage) => {
         setCurrentPage(newPage);
     };
 
-    const paginatedData = filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
-
-    // const filteredData = data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+    const filteredData = data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
     console.log(filteredData);
 
@@ -81,7 +63,7 @@ export default function Data(props) {
                             </tr>
                             </thead>
                             <tbody>
-                            {Object.entries(paginatedData).map(([key, value]) => (
+                            {Object.entries(filteredData).map(([key, value]) => (
                                 <tr className='border-b-slate-700'>
                                     <th>{i++}</th>
                                     {/* <td>{value.nik_anak}</td> */}

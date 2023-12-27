@@ -3,20 +3,26 @@ import { Link, Head } from '@inertiajs/react';
 
 export default function DetailChild(props) {
     const data = props.data;
+    // console.log(typeof data.usia, data.usia);
     function toTitleCase(str) {
         return str.replace(/\w\S*/g, function(txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
     }
+
+    function calculateAge(dateString) {
+        const birthDate = new Date(dateString);
+        const today = new Date();
+        const differenceInTime = today.getTime() - birthDate.getTime();
+        const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+        return Math.floor(differenceInDays);
+    }
+
+    const [birthDate, setBirthDate] = useState(data.tanggal_lahir);
+    const ageInDays = calculateAge(birthDate);
+    console.log(ageInDays);
+
     const endpoint = 'https://robotlintang.id/api/api.php?data=realtime'
-    // const endpoint = 'https://127.0.0.1:8000/data/getall';
-    // axios.get(endpoint)
-    //     .then((response) => {
-    //         console.log(response.data)
-    //     });
-    // console.log(document.getElementById('measureTable'));
-    const measureTable = document.getElementById('measureTable');
-    // console.log(data);
 
     const [inputValue, setInputValue] = useState('');
     var beratBadan = document.getElementById('beratBadan');
@@ -43,6 +49,10 @@ export default function DetailChild(props) {
     // Set up an effect that runs whenever endpoint changes
     useEffect(() => {
         fetchData();
+        const interval = setInterval(() => {
+            fetchData();
+        }, 2000);
+        return () => clearInterval(interval);
     }, [endpoint]);  // Dependency array includes endpoint
     return (
         <>

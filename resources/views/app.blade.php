@@ -26,6 +26,7 @@
                         <div class="w-full h-full p-4">
                             <h1 class="text-lg font-bold mb-4">Ukur Data Anak</h1>
                             <form action='/dashboard/data/measure' method="post">
+                                @csrf
                                 <input type="text" id="beratBadan" name="beratBadan" placeholder="Masukkan berat badan..." class="input input-bordered w-full max-w-xs mb-3" />
                                 <div class="mb-3">
                                     <input type="text" id="tinggiBadan" name="tinggiBadan" placeholder="Masukkan tinggi badan..." class="input input-bordered w-full max-w-xs mb-3" />

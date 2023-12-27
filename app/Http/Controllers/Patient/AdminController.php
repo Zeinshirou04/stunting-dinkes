@@ -102,6 +102,19 @@ class AdminController extends Controller
         return Inertia::render('Profile/Dashboard', $data);
     }
 
+    public function daycare()
+    {
+        $data = [
+            'title' => 'Robot Lintang - Dashboard',
+            'view' => 'Daycare',
+            'nama_user' => session()->get('nama'),
+        ];
+
+        // dd($data);
+
+        return Inertia::render('Profile/Dashboard', $data);
+    }
+
     public function device()
     {
         $deviceID = User::where('id', session()->get('id'))->first()->id_alat == null ? null : User::where('id', session()->get('id'))->first()->id_alat;

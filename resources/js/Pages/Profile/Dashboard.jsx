@@ -13,6 +13,7 @@ export default function Dashboard(props) {
                 <div className='w-full h-full pt-3'>
                     {props.view == 'Home' ? Home(props) : null}
                     {props.view == 'Data' ? Data(props) : null}
+                    {/* {props.view == 'Daycare' ? Daycare(props) : null} */}
                     {props.view == 'Device' ? Chat(props) : null}
                     {props.view == 'Detail' ? DetailChild(props) : null}
                 </div>
@@ -29,6 +30,12 @@ export default function Dashboard(props) {
                             <span className="btm-nav-label">Data</span>
                         </button>
                     </a>
+                    {/* <a href="/dashboard/daycare" className={props.view == 'Daycare' ? 'active' : null}>
+                        <button className='flex flex-col justify-center items-center'>
+                            <i className="fa-solid fa-calendar-days text-gray-400 h-5 w-5"></i>
+                            <span className="btm-nav-label">Daycare</span>
+                        </button>
+                    </a> */}
                     <a href="/dashboard/device" className={props.view == 'Device' ? 'active' : null}>
                         <button className='flex flex-col justify-center items-center'>
                             <i className="fa-brands fa-bluetooth text-gray-400 text-lg font-light"></i>
