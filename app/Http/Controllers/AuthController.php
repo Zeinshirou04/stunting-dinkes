@@ -67,4 +67,13 @@ class AuthController extends Controller
             }
         }
     }
+
+    public function logout()
+    {
+        $userID = session()->get('id');
+        User::where('id', $userID)->update(['status' => 0]);
+        User::where('id', $userID)->update(['id_alat' => null]);
+        session()->flush();
+        return redirect()->route('login');
+    }
 }

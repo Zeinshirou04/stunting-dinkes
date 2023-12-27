@@ -30,7 +30,7 @@
                                 <input type="text" id="beratBadan" name="beratBadan" placeholder="Masukkan berat badan..." class="input input-bordered w-full max-w-xs mb-3" />
                                 <div class="mb-3">
                                     <input type="text" id="tinggiBadan" name="tinggiBadan" placeholder="Masukkan tinggi badan..." class="input input-bordered w-full max-w-xs mb-3" />
-                                    <p class="text-sm text-gray-500">Hasil Z-Score: </p>
+                                    <p class="text-sm text-gray-500">Hasil Z-Score: <span id="z-score"></span></p>
                                     <p class="text-sm text-gray-500">Metode Penimbangan : <span id="posisi"></span></p>
                                 </div>
                                 <input type="submit" class="btn btn-accent" value="Kirim">

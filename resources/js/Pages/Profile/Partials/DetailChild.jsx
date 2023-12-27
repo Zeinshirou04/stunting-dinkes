@@ -20,7 +20,7 @@ export default function DetailChild(props) {
 
     const [birthDate, setBirthDate] = useState(data.tanggal_lahir);
     const ageInDays = calculateAge(birthDate);
-    console.log(ageInDays);
+    // console.log(ageInDays);
 
     const endpoint = 'https://robotlintang.id/api/api.php?data=realtime'
 
@@ -28,24 +28,42 @@ export default function DetailChild(props) {
     var beratBadan = document.getElementById('beratBadan');
     var tinggiBadan = document.getElementById('tinggiBadan');
     var posisi = document.getElementById('posisi');
+    var z_score = document.getElementById('z-score');
 
     // console.log(beratBadan);
 
     beratBadan.value = inputValue.sensor_1;
     tinggiBadan.value = inputValue.sensor_2;
-    posisi.innerHTML = inputValue.posisi == 'T' ? 'Terlentang' : 'Berdiri';
+    posisi.innerHTML = inputValue.posisi == 'T' ? 'Terlentang' : inputValue.posisi == 'B' ? 'Berdiri' : 'Tak Terdefinisi';
     
     // Fetch data from the API and update inputValue
     const fetchData = async () => {
         try {
             const response = await axios.get(endpoint);
-            console.log(response.data.data[0]);
             setInputValue(response.data.data[0]);
         } catch (error) {
             console.error(error);
         }
     };
-    
+
+    if(ageInDays < 730) {
+        if(inputValue.posisi == 'T') {
+            z_score.innerHTML = inputValue.sensor_2;
+        } else if(inputValue.posisi == 'B') {
+            z_score.innerHTML = inputValue.sensor_2 + 0.7;
+        } else {
+            z_score.innerHTML = 'Tak Terdefinisi';
+        }
+    } else if(ageInDays >= 730) {
+        if(inputValue.posisi == 'B') {
+            z_score.innerHTML = inputValue.sensor_2;
+        } else if(inputValue.posisi == 'T') {
+            z_score.innerHTML = inputValue.sensor_2 - 0.7;
+        } else {
+            z_score.innerHTML = 'Tak Terdefinisi';
+        }
+    }
+
     // Set up an effect that runs whenever endpoint changes
     useEffect(() => {
         fetchData();

@@ -82,7 +82,7 @@ export default function Device(props) {
         </form>
     </>
     
-
+    
     return (
         <>
             <div className='flex flex-col justify-center items-center gap-3 w-full h-full'>
@@ -91,6 +91,12 @@ export default function Device(props) {
                     <div className="mt-12 w-full">
                         <div className="mt-3 w-full flex flex-col justify-center items-center">
                             {props.id_alat == null ? formView : connectedView}
+                        </div>
+                        <div className='mt-6 w-full flex flex-col justify-center items-center'>
+                            <p className='label text-sm text-center'>Ingin keluar? (Log Out)</p>
+                            <a href="/logout">
+                                <button className='btn btn-error'>Log Out</button>
+                            </a>
                         </div>
                         {/* <button className='btn btn-link' onClick={connect}>Connect</button> */}
                     </div>

@@ -26,6 +26,8 @@ Route::middleware('login')->group(function () {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
 });
 
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::middleware('dashboard')->group(function () {
     Route::get('/dashboard/home', [AdminController::class, 'index'])->name('dashboard-home');
     Route::get('/dashboard/data', [AdminController::class, 'data'])->name('dashboard-data');
