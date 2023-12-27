@@ -115,6 +115,20 @@ class AdminController extends Controller
         return Inertia::render('Profile/Dashboard', $data);
     }
 
+    public function chat()
+    {
+        $data = [
+            'title' => 'Robot Lintang - Dashboard',
+            'view' => 'Chat',
+            'nama_user' => session()->get('nama'),
+            'gpt_token' => ENV('API_KEY'),
+        ];
+
+        // dd($data);
+
+        return Inertia::render('Profile/Dashboard', $data);
+    }
+
     public function device()
     {
         $deviceID = User::where('id', session()->get('id'))->first()->id_alat == null ? null : User::where('id', session()->get('id'))->first()->id_alat;

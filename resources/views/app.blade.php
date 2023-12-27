@@ -19,6 +19,7 @@
         @inertiaHead
     </head>
     <body class="w-screen">
+        <script src="https://code.responsivevoice.org/responsivevoice.js?key=G2tYg4eu"></script>
         <div id="measureTable" class='h-full w-full absolute hidden'>
             <div class="w-full h-full relative flex flex-col justify-center items-center">
                 <div id="measureFront" class="w-4/5 absolute z-20">

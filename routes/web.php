@@ -32,8 +32,7 @@ Route::middleware('dashboard')->group(function () {
     Route::get('/dashboard/home', [AdminController::class, 'index'])->name('dashboard-home');
     Route::get('/dashboard/data', [AdminController::class, 'data'])->name('dashboard-data');
     Route::get('/dashboard/data/show', [ChildController::class, 'index'])->name('dashboard-show');
-    Route::get('/dashboard/daycare', [AdminController::class, 'daycare'])->name('dashboard-data');
-    Route::get('/dashboard/daycare/show', [ChildController::class, 'daycareShow'])->name('dashboard-show');
+    Route::get('/dashboard/chat', [AdminController::class, 'chat'])->name('dashboard-data');
     Route::post('/dashboard/data/measure', [ChildController::class, 'measure'])->name('dashboard-show-measure');
     Route::get('/dashboard/device', [AdminController::class, 'device'])->name('dashboard-device');
     Route::post('/dashboard/device/connect', [AdminController::class, 'connect'])->name('dashboard-device-connnect');

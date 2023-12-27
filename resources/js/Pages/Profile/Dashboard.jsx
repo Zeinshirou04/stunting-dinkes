@@ -1,7 +1,8 @@
 import React from 'react';
 import Home from './Partials/Home';
 import Data from './Partials/Data';
-import Chat from './Partials/Device';
+import Chat from './Partials/Chat';
+import Device from './Partials/Device';
 import DetailChild from './Partials/DetailChild';
 import { Link, Head } from '@inertiajs/react';
 
@@ -13,8 +14,9 @@ export default function Dashboard(props) {
                 <div className='w-full h-full pt-3'>
                     {props.view == 'Home' ? Home(props) : null}
                     {props.view == 'Data' ? Data(props) : null}
+                    {props.view == 'Chat' ? Chat(props) : null}
                     {/* {props.view == 'Daycare' ? Daycare(props) : null} */}
-                    {props.view == 'Device' ? Chat(props) : null}
+                    {props.view == 'Device' ? Device(props) : null}
                     {props.view == 'Detail' ? DetailChild(props) : null}
                 </div>
                 <div className="btm-nav">
@@ -30,12 +32,12 @@ export default function Dashboard(props) {
                             <span className="btm-nav-label">Data</span>
                         </button>
                     </a>
-                    {/* <a href="/dashboard/daycare" className={props.view == 'Daycare' ? 'active' : null}>
+                    <a href="/dashboard/chat" className={props.view == 'Chat' ? 'active' : null}>
                         <button className='flex flex-col justify-center items-center'>
-                            <i className="fa-solid fa-calendar-days text-gray-400 h-5 w-5"></i>
-                            <span className="btm-nav-label">Daycare</span>
+                            <i class="fa-solid fa-comments text-gray-400 h-5 w-5"></i>
+                            <span className="btm-nav-label">Q&A</span>
                         </button>
-                    </a> */}
+                    </a>
                     <a href="/dashboard/device" className={props.view == 'Device' ? 'active' : null}>
                         <button className='flex flex-col justify-center items-center'>
                             <i className="fa-brands fa-bluetooth text-gray-400 text-lg font-light"></i>
