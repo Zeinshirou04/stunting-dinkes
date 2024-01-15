@@ -21,17 +21,22 @@ export default function DetailChild(props) {
     const [birthDate, setBirthDate] = useState(data.tanggal_lahir);
     const ageInDays = calculateAge(birthDate);
     // console.log(ageInDays);
-
-    const endpoint = 'https://robotlintang.id/api/api.php?data=realtime'
-
+    
+    
+    const endpoint = 'https://robotlintang.id/api/api.php?data=realtime';
+    
     const [inputValue, setInputValue] = useState('');
     var beratBadan = document.getElementById('beratBadan');
     var tinggiBadan = document.getElementById('tinggiBadan');
     var posisi = document.getElementById('posisi');
+    var tb_koreksi = document.getElementById('tb-koreksi');
     var z_score = document.getElementById('z-score');
-
+    var kategori = document.getElementById('kategori');
+    // console.log(ageInDays);
+    // console.log(props.zScores);
+    
     // console.log(beratBadan);
-
+    
     beratBadan.value = inputValue.sensor_1;
     tinggiBadan.value = inputValue.sensor_2;
     posisi.innerHTML = inputValue.posisi == 'T' ? 'Terlentang' : inputValue.posisi == 'B' ? 'Berdiri' : 'Tak Terdefinisi';
@@ -45,25 +50,68 @@ export default function DetailChild(props) {
             console.error(error);
         }
     };
-
+    
     if(ageInDays < 730) {
         if(inputValue.posisi == 'T') {
-            z_score.innerHTML = inputValue.sensor_2;
+            tb_koreksi.innerHTML = inputValue.sensor_2;
         } else if(inputValue.posisi == 'B') {
-            z_score.innerHTML = inputValue.sensor_2 + 0.7;
+            tb_koreksi.innerHTML = inputValue.sensor_2 + 0.7;
         } else {
-            z_score.innerHTML = 'Tak Terdefinisi';
+            tb_koreksi.innerHTML = 'Tak Terdefinisi';
         }
     } else if(ageInDays >= 730) {
         if(inputValue.posisi == 'B') {
-            z_score.innerHTML = inputValue.sensor_2;
+            tb_koreksi.innerHTML = inputValue.sensor_2;
         } else if(inputValue.posisi == 'T') {
-            z_score.innerHTML = inputValue.sensor_2 - 0.7;
+            tb_koreksi.innerHTML = inputValue.sensor_2 - 0.7;
         } else {
-            z_score.innerHTML = 'Tak Terdefinisi';
+            tb_koreksi.innerHTML = 'Tak Terdefinisi';
         }
     }
+    
+    var tb_koreksi = parseFloat(tb_koreksi.innerHTML);
 
+    var z_score_tbu_a = (tb_koreksi - props.zScores[0].SD0) / (props.zScores[0].SD0 - props.zScores[0].SD1neg);
+    var z_score_tbu_b = (tb_koreksi - props.zScores[0].SD0) / (props.zScores[0].SD1 - props.zScores[0].SD0);
+    // console.log(props.zScores[0]);
+    z_score.innerHTML = tb_koreksi <= props.zScores[0].SD0 ? parseFloat(z_score_tbu_a).toFixed(2) : parseFloat(z_score_tbu_b).toFixed(2);
+
+    /*
+    
+        Hilangkan Komentar pada baris-baris dibawah untuk kategori TB/U
+
+    */
+
+    if(tb_koreksi <= props.zScores[0].SD3neg) {
+        kategori.innerHTML = "Sangat Pendek";
+    } else if(tb_koreksi >= props.zScores[0].SD3neg && tb_koreksi < props.zScores[0].SD2neg) {
+        kategori.innerHTML = "Pendek";
+    } else if(tb_koreksi >= props.zScores[0].SD2neg && tb_koreksi <= props.zScores[0].SD2) {
+        kategori.innerHTML = "Normal";
+    } else if(tb_koreksi > props.zScores[0].SD2) {
+        kategori.innerHTML = "Tinggi";
+    }
+    
+    /*
+    
+        Hilangkan Komentar pada baris-baris dibawah untuk kategori BB/TB
+
+    */
+
+    // if(inputValue.sensor_1 <= props.zScores[0].SD3neg) {
+    //     kategori.innerHTML = "Gizi Buruk";
+    // } else if(inputValue.sensor_1 >= props.zScores[0].SD3neg && inputValue.sensor_1 <= props.zScores[0].SD2neg) {
+    //     kategori.innerHTML = "Gizi Kurang";
+    // } else if(inputValue.sensor_1 >= props.zScores[0].SD2neg && inputValue.sensor_1 <= props.zScores[0].SD1) {
+    //     kategori.innerHTML = "Normal";
+    // } else if(inputValue.sensor_1 >= props.zScores[0].SD1 && inputValue.sensor_1 <= props.zScores[0].SD2) {
+    //     kategori.innerHTML = "Risiko Gizi Lebih";
+    // } else if(inputValue.sensor_1 >= props.zScores[0].SD2 && inputValue.sensor_1 <= props.zScores[0].SD3) {
+    //     kategori.innerHTML = "Gizi Lebih";
+    // } else if(inputValue.sensor_1 >= props.zScores[0].SD3) {
+    //     kategori.innerHTML = "Obesitas";
+    // }
+    
     // Set up an effect that runs whenever endpoint changes
     useEffect(() => {
         fetchData();

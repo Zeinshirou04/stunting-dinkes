@@ -65,6 +65,8 @@ class AuthController extends Controller
             }else{
                 return redirect()->route('login')->with('error', 'Password Salah');
             }
+        } else {
+            return redirect()->route('login')->with('error', 'Username Tidak Ditemukan');
         }
     }
 
