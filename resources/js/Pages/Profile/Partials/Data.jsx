@@ -87,7 +87,7 @@ export default function Data(props) {
                                     {/* <td>{value.nik_anak}</td> */}
                                     <td>{value.nama_anak}</td>
                                     <td>
-                                        <a href={'/dashboard/data/show?nik=' + value.nik_anak}>
+                                        <a href={props.url + '/dashboard/data/show?nik=' + value.nik_anak}>
                                             <button className="btn btn-info">Detail</button>
                                         </a>
                                     </td>

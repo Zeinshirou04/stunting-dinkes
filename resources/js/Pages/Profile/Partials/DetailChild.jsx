@@ -73,7 +73,8 @@ export default function DetailChild(props) {
 
     var z_score_tbu_a = (tb_koreksi - props.zScores[0].SD0) / (props.zScores[0].SD0 - props.zScores[0].SD1neg);
     var z_score_tbu_b = (tb_koreksi - props.zScores[0].SD0) / (props.zScores[0].SD1 - props.zScores[0].SD0);
-    // console.log(props.zScores[0]);
+    console.log(z_score_tbu_a, z_score_tbu_b)
+    console.log(props.zScores[0]);
     z_score.innerHTML = tb_koreksi <= props.zScores[0].SD0 ? parseFloat(z_score_tbu_a).toFixed(2) : parseFloat(z_score_tbu_b).toFixed(2);
 
     /*

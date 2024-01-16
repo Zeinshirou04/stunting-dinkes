@@ -72,6 +72,7 @@ class ChildController extends Controller
             'cryptNik' => $cryptNik,
             'data' => $patients,
             'zScores' => $zScores->where('Day', $ageInDays)->get(),
+            'url' => url(''),
         ];
 
         // dd($data);

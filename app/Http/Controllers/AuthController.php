@@ -29,6 +29,7 @@ class AuthController extends Controller
         
         $data = [
             'title' => 'Robot Lintang - Login',
+            'url' => url(''),
         ];
         // dd($data);
 

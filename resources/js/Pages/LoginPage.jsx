@@ -14,7 +14,7 @@ export default function Login(props) {
             </Head>
             <div className="h-full w-full py-8 flex flex-col sm:flex-row sm:px-8">
                 <figure className='w-1/4 my-8 mx-auto sm:mx-4 flex flex-col justify-center'>
-                    <img src="/assets/img/dinkes-logo.png" alt="Lambang Dinas Kesehatan Hijau Biru" />
+                    <img src={props.url + '/assets/img/dinkes-logo.png'} alt="Lambang Dinas Kesehatan Hijau Biru" />
                 </figure>
                 <div className="mx-auto w-4/5 py-12 px-8 bg-slate-700 rounded-xl">
                     <div className='w-full mx-auto'>

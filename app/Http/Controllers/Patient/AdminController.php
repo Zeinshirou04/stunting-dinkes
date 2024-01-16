@@ -45,8 +45,6 @@ class AdminController extends Controller
             return $item['puskesmas'] == $puskesmas['nama'];
         });
         
-        // dd($patients);
-        
         $data = [
             'title' => 'Robot Lintang - Dashboard',
             'view' => 'Home',
@@ -54,6 +52,7 @@ class AdminController extends Controller
             'data' => $patients,
             'data_view' => collect($patients)->sortBy('nama')->take(5)->toArray(),
             'puskesmas' => $puskesmas['nama'],
+            'url' => url(''),
         ];
         
         // dd($data);
@@ -95,6 +94,7 @@ class AdminController extends Controller
             'view' => 'Data',
             'nama_user' => session()->get('nama'),
             'data' => $patients,
+            'url' => url(''),
         ];
 
         // dd($data);
@@ -108,6 +108,7 @@ class AdminController extends Controller
             'title' => 'Robot Lintang - Dashboard',
             'view' => 'Daycare',
             'nama_user' => session()->get('nama'),
+            'url' => url(''),
         ];
 
         // dd($data);
@@ -122,6 +123,7 @@ class AdminController extends Controller
             'view' => 'Chat',
             'nama_user' => session()->get('nama'),
             'gpt_token' => ENV('API_KEY'),
+            'url' => url(''),
         ];
 
         // dd($data);
@@ -136,6 +138,7 @@ class AdminController extends Controller
             'title' => 'Robot Lintang - Dashboard',
             'view' => 'Device',
             'id_alat' => $deviceID,
+            'url' => url(''),
         ];
 
         return Inertia::render('Profile/Dashboard', $data);
