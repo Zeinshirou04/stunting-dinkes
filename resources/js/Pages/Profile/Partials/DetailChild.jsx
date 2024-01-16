@@ -38,10 +38,14 @@ export default function DetailChild(props) {
     
     // console.log(beratBadan);
     
-    beratBadan.value = inputValue.sensor_1;
-    tinggiBadan.value = inputValue.sensor_2;
-    posisi.innerHTML = inputValue.posisi == 'T' ? 'Terlentang' : inputValue.posisi == 'B' ? 'Berdiri' : 'Tak Terdefinisi';
-    usia.innerHTML = ageInDays + ' Hari';
+    beratBadan.value = parseFloat(inputValue.sensor_1);
+    tinggiBadan.value = parseFloat(inputValue.sensor_2);
+    posisi.innerHTML = inputValue.posisi == 'T' || inputValue.posisi == 'L' ? 'Terlentang' : inputValue.posisi == 'B' ? 'Berdiri' : 'Berdiri';
+    usia.innerHTML = data.usia;
+
+    console.log(typeof beratBadan.value, beratBadan.value)
+    console.log(typeof tinggiBadan.value, tinggiBadan.value)
+    console.log(typeof inputValue.posisi, inputValue.posisi)
     
     // Fetch data from the API and update inputValue
     const fetchData = async () => {
@@ -55,17 +59,17 @@ export default function DetailChild(props) {
     
     if(ageInDays < 730) {
         if(inputValue.posisi == 'T') {
-            tb_koreksi.innerHTML = inputValue.sensor_2;
-        } else if(inputValue.posisi == 'B') {
-            tb_koreksi.innerHTML = inputValue.sensor_2 + 0.7;
+            tb_koreksi.innerHTML = parseFloat(tinggiBadan.value);
+        } else if(inputValue.posisi == 'B' || inputValue.posisi == '') {
+            tb_koreksi.innerHTML = parseFloat(tinggiBadan.value) + 0.7;
         } else {
             tb_koreksi.innerHTML = 'Tak Terdefinisi';
         }
     } else if(ageInDays >= 730) {
-        if(inputValue.posisi == 'B') {
-            tb_koreksi.innerHTML = inputValue.sensor_2;
+        if(inputValue.posisi == 'B' || inputValue.posisi == '') {
+            tb_koreksi.innerHTML = parseFloat(tinggiBadan.value);
         } else if(inputValue.posisi == 'T') {
-            tb_koreksi.innerHTML = inputValue.sensor_2 - 0.7;
+            tb_koreksi.innerHTML = parseFloat(tinggiBadan.value) - 0.7;
         } else {
             tb_koreksi.innerHTML = 'Tak Terdefinisi';
         }
