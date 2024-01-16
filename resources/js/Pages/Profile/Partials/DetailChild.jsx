@@ -32,6 +32,7 @@ export default function DetailChild(props) {
     var tb_koreksi = document.getElementById('tb-koreksi');
     var z_score = document.getElementById('z-score');
     var kategori = document.getElementById('kategori');
+    var usia = document.getElementById('usia-anak');
     // console.log(ageInDays);
     // console.log(props.zScores);
     
@@ -40,6 +41,7 @@ export default function DetailChild(props) {
     beratBadan.value = inputValue.sensor_1;
     tinggiBadan.value = inputValue.sensor_2;
     posisi.innerHTML = inputValue.posisi == 'T' ? 'Terlentang' : inputValue.posisi == 'B' ? 'Berdiri' : 'Tak Terdefinisi';
+    usia.innerHTML = ageInDays + ' Hari';
     
     // Fetch data from the API and update inputValue
     const fetchData = async () => {

@@ -33,6 +33,7 @@
                                 <div class="mb-3">
                                     <p class="text-sm text-gray-500">Tinggi Badan</p>
                                     <input type="text" id="tinggiBadan" name="tinggiBadan" placeholder="Masukkan tinggi badan..." class="input input-bordered w-full max-w-xs mb-3" />
+                                    <p class="text-sm text-gray-500">Usia Anak: <span id="usia-anak"></span></p>
                                     <p class="text-sm text-gray-500">Tinggi Badan Koreksi: <span id="tb-koreksi"></span></p>
                                     <p class="text-sm text-gray-500">Metode Penimbangan : <span id="posisi"></span></p>
                                     <p class="text-sm text-gray-500">Z-Score Anak : <span id="z-score"></span></p>
