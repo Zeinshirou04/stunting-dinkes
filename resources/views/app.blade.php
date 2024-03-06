@@ -34,11 +34,15 @@
                                 <div class="mb-3">
                                     <p class="text-sm text-gray-500">Tinggi Badan</p>
                                     <input type="text" id="tinggiBadan" name="tinggiBadan" placeholder="Masukkan tinggi badan..." class="input input-bordered w-full max-w-xs mb-3" />
+                                    <input type="number" style="display: none;" id="kodeAnak" name="kodeAnak" class="">
                                     <p class="text-sm text-gray-500">Usia Anak: <span id="usia-anak"></span></p>
                                     <p class="text-sm text-gray-500">Tinggi Badan Koreksi: <span id="tb-koreksi"></span></p>
                                     <p class="text-sm text-gray-500">Metode Penimbangan : <span id="posisi"></span></p>
                                     <p class="text-sm text-gray-500">Z-Score Anak : <span id="z-score"></span></p>
                                     <p class="text-sm text-gray-500">Kategori TB/U : <span id="kategori"></span></p>
+                                    <input type="text" style="display: none;" id="posisiInput" name="posisi" class="">
+                                    <input type="text" style="display: none;" id="zs_tbu" name="zs_tbu" class="">
+                                    <input type="text" style="display: none;" id="tbu" name="tbu" class="">
                                 </div>
                                 <input type="submit" class="btn btn-accent" value="Kirim">
                             </form>

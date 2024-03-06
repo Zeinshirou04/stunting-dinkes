@@ -21,18 +21,24 @@ export default function DetailChild(props) {
     const [birthDate, setBirthDate] = useState(data.tanggal_lahir);
     const ageInDays = calculateAge(birthDate);
     // console.log(ageInDays);
+
+    // console.log(props.id_alat)
     
-    
-    const endpoint = 'https://robotlintang.id/api/api.php?data=realtime';
+    const endpoint = 'https://robotlintang.id/api/api.php?data=realtime&id=' + props.id_alat;
+    console.log(endpoint);
     
     const [inputValue, setInputValue] = useState('');
     var beratBadan = document.getElementById('beratBadan');
     var tinggiBadan = document.getElementById('tinggiBadan');
     var posisi = document.getElementById('posisi');
+    var posisiInput = document.getElementById('posisiInput');
     var tb_koreksi = document.getElementById('tb-koreksi');
     var z_score = document.getElementById('z-score');
     var kategori = document.getElementById('kategori');
     var usia = document.getElementById('usia-anak');
+    var kodeAnak = document.getElementById('kodeAnak');
+    var zs_tbu = document.getElementById('zs_tbu');
+    var tbu = document.getElementById('tbu');
     // console.log(ageInDays);
     // console.log(props.zScores);
     
@@ -41,7 +47,9 @@ export default function DetailChild(props) {
     beratBadan.value = parseFloat(inputValue.sensor_1);
     tinggiBadan.value = parseFloat(inputValue.sensor_2);
     posisi.innerHTML = inputValue.posisi == 'T' || inputValue.posisi == 'L' ? 'Terlentang' : inputValue.posisi == 'B' ? 'Berdiri' : 'Berdiri';
+    posisiInput.value = posisi.innerHTML;
     usia.innerHTML = data.usia;
+    kodeAnak.value = data.kode_anak;
 
     console.log(typeof beratBadan.value, beratBadan.value)
     console.log(typeof tinggiBadan.value, tinggiBadan.value)
@@ -51,6 +59,7 @@ export default function DetailChild(props) {
     const fetchData = async () => {
         try {
             const response = await axios.get(endpoint);
+            console.log(response.data.data[0]);
             setInputValue(response.data.data[0]);
         } catch (error) {
             console.error(error);
@@ -82,6 +91,7 @@ export default function DetailChild(props) {
     console.log(z_score_tbu_a, z_score_tbu_b)
     console.log(props.zScores[0]);
     z_score.innerHTML = tb_koreksi <= props.zScores[0].SD0 ? parseFloat(z_score_tbu_a).toFixed(2) : parseFloat(z_score_tbu_b).toFixed(2);
+    zs_tbu.value = z_score.innerHTML;
 
     /*
     
@@ -98,6 +108,8 @@ export default function DetailChild(props) {
     } else if(tb_koreksi > props.zScores[0].SD2) {
         kategori.innerHTML = "Tinggi";
     }
+
+    tbu.value = kategori.innerHTML;
     
     /*
     

@@ -24,7 +24,8 @@ class Puskesmas extends Authenticatable
         'Content-Type' => 'application/json'
     ];
 
-    protected $apiUrl = 'https://sim.sayanganak.semarangkota.go.id/api/list-puskesmas';
+    // protected $apiUrl = 'https://sim.sayanganak.semarangkota.go.id/api/list-puskesmas';
+    protected $apiUrl = 'http://119.2.50.170:5500/sayang-anak/api/list-puskesmas';
      
     protected $fillable = [
 

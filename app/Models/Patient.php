@@ -26,7 +26,7 @@ class Patient extends Authenticatable
 
     // protected $apiUrl = 'https://sim.sayanganak.semarangkota.go.id/api/stunting';
     // protected $apiUrl = 'http://119.2.50.170:5500/sayang-anak/api/stunting';
-    protected $apiUrl = 'http://119.2.50.170:5500/sayang-anak/api/pasien?limit=500&offset=1';
+    protected $apiUrl = 'http://119.2.50.170:5500/sayang-anak/api/pasien?limit=1000&offset=1';
     
     protected $fillable = [
 

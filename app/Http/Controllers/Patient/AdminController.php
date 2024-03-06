@@ -37,13 +37,18 @@ class AdminController extends Controller
         $puskesmas = array_filter($this->puskesmas->get(), function ($item) {
             $kode_puskesmas = session()->get('kode_puskesmas');
             return $item['kode'] == $kode_puskesmas;
-        })[1];
+        });
 
+        // $puskesmasA = $this->puskesmas->get();
+
+        // dd(array_column($puskesmas, 'nama')[0]);
         // dd($patient->getStunting());
 
         $patients = array_filter($this->patient->getStunting(), function ($item) use ($puskesmas) {
-            return $item['puskesmas'] == $puskesmas['nama'];
+            return $item['puskesmas'] == array_column($puskesmas, 'nama')[0];
         });
+
+        // dd($patients);
         
         $data = [
             'title' => 'Robot Lintang - Dashboard',
@@ -51,7 +56,7 @@ class AdminController extends Controller
             'nama_user' => session()->get('nama'),
             'data' => $patients,
             'data_view' => collect($patients)->sortBy('nama')->take(5)->toArray(),
-            'puskesmas' => $puskesmas['nama'],
+            'puskesmas' => array_column($puskesmas, 'nama'),
             'url' => url(''),
         ];
         
@@ -65,12 +70,12 @@ class AdminController extends Controller
         $puskesmas = array_filter($this->puskesmas->get(), function ($item) {
             $kode_puskesmas = session()->get('kode_puskesmas');
             return $item['kode'] == $kode_puskesmas;
-        })[1];
+        });
 
         // dd($patient->getStunting());
 
         $patients = array_filter($this->patient->getStunting(), function ($item) use ($puskesmas) {
-            return $item['puskesmas'] == $puskesmas['nama'];
+            return $item['puskesmas'] == array_column($puskesmas, 'nama')[0];
         });
 
         // $patients = $patient->getStunting();
